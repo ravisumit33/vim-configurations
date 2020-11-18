@@ -91,16 +91,12 @@ nnoremap <expr> <silent> <F3> (&diff ? "[c" : ":cprev\<CR>")
 """""""""""""""" Miscellaneous plugin settings """"""""""""""""
 
 " Gutentags settings
-
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', 'requirements.txt', '.git']
-
-
 let g:gutentags_ctags_extra_args = [
 \ '--tag-relative=yes',
 \ '--fields=+ailmnS',
 \]
-
 let g:gutentags_ctags_exclude = [
 \ '*.git', '*.svg', '*.hg',
 \ '*/tests/*',
@@ -163,7 +159,7 @@ let g:vista#renderer#enable_icon = 1
 
 """""""""""""""" COC Settings """""""""""""""""""""""""""""""""
 
-let g:coc_node_path="/Users/sumik/.nvm/versions/node/v14.2.0/bin/node"
+let g:coc_node_path="~/.nvm/versions/node/v14.2.0/bin/node"
 let b:coc_root_patterns = ['.git', '.env']
 
 let g:coc_global_extensions = [
