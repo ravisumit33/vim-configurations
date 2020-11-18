@@ -166,6 +166,29 @@ let g:vista#renderer#enable_icon = 1
 let g:coc_node_path="/Users/sumik/.nvm/versions/node/v14.2.0/bin/node"
 let b:coc_root_patterns = ['.git', '.env']
 
+let g:coc_global_extensions = [
+\'coc-markdownlint',
+\'coc-highlight',
+\'coc-python',
+\'coc-explorer',
+\'coc-json', 
+\'coc-git',
+\'coc-yank',
+\'coc-tabnine',
+\'coc-snippets',
+\'coc-prettier',
+\'coc-lists',
+\'coc-explorer',
+\'coc-eslint',
+\'coc-cssmodules',
+\'coc-actions',
+\'coc-yaml',
+\'coc-vimlsp',
+\'coc-tsserver',
+\'coc-html',
+\'coc-css',
+\'coc-clangd',
+\]
 
 " TextEdit might fail if hidden is not set.
 set hidden
