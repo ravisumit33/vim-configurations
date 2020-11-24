@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  /* "coc.preferences.formatOnSaveFiletypes": ["python", "javascript"], */
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true, 
   "explorer.previewAction.onHover": false,
@@ -8,19 +8,25 @@
     "v": "open:vsplit",
     "W": "workspaceFolders"
   },
+
   "list.normalMappings": {
     "q": "action:quickfix"
   },
-  "list.previewSplitRight":true,
+  /* "list.previewSplitRight":true, */
   "list.source.grep.excludePatterns": ["^tags*", "**/.git/*"],
   "list.source.files.args": ["--hidden", "--files"],
+
   "diagnostic.errorSign": "✗" ,
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "ⓘ",
+
   "git.addGBlameToVirtualText": true,
-  "clangd.path": "/Users/sumik/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd",
-  "python.jediPath": "/usr/local/lib/python3.8/site-packages",
-  "python.formatting.provider": "black",
+
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+
+  "python.jediPath": "~/Library/Python/3.9/lib/python/site-packages",
+  /* "python.formatting.provider": "black", */
   "python.terminal.activateEnvironment": true
+  /* "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags" */
 }
 
