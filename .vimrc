@@ -350,7 +350,7 @@ nnoremap <silent><nowait> <C-p> :<C-u>CocList files<CR>
 " Grep in workspace files.
 nnoremap <silent><nowait> <space>g  :<C-u>CocList -I grep -S -F -e<cr>
 " Grep word under cursor with interactive mode
-nnoremap <silent><nowait> rg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nnoremap <silent><nowait> rg :exe 'CocList -I --input='.expand('<cword>').' grep -e'<CR>
 " Search workspace tags
 nnoremap <silent><nowait> <space>t :<C-u>CocList tags<CR>
 
@@ -419,9 +419,6 @@ nnoremap <M-n> :call OpenVTerminal()<CR>
 " Neo vim provider settings
 let g:node_host_prog='~/.nvm/versions/node/v14.2.0/bin/neovim-node-host'
 let g:python3_host_prog='/usr/local/bin/python3'
-
-" *config.json is actually jsonc, help TypeScript set the correct filetype
-autocmd BufRead,BufNewFile *config.json set filetype=jsonc
 
 " Apply gruvbox colorscheme
 autocmd vimenter * ++nested colorscheme gruvbox
