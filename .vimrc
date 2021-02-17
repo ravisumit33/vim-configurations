@@ -1,6 +1,5 @@
 """""""""""""""" Load vim plugins """""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
 " Syntax highlight
@@ -38,7 +37,9 @@ set encoding=utf-8
 set termguicolors
 syntax on
 filetype plugin on
-
+set foldmethod=indent " Foldmethod syntax is causing performance
+set nofoldenable
+set foldlevel=99
 " jump to the tag if there's only one match or show list if there are multiple matches
 nnoremap <C-]> g<C-]>
 
@@ -348,7 +349,7 @@ nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Search workspace files.
 nnoremap <silent><nowait> <C-p> :<C-u>CocList files<CR>
 " Grep in workspace files.
-nnoremap <silent><nowait> <space>g  :<C-u>CocList -I grep -S -F -e<cr>
+nnoremap <silent><nowait> <space>g  :<C-u>CocList -I grep -S -F<cr>
 " Grep word under cursor with interactive mode
 nnoremap <silent><nowait> rg :exe 'CocList -I --input='.expand('<cword>').' grep -e'<CR>
 " Search workspace tags
