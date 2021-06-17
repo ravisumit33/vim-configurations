@@ -1,45 +1,116 @@
 """""""""""""""" Load vim plugins """""""""""""""""""""""""""""
+
 call plug#begin('~/.vim/plugged')
+
 " Colorscheme
-Plug 'gruvbox-community/gruvbox'
+" Plug 'gruvbox-community/gruvbox'
+Plug 'rktjmp/lush.nvim'
+Plug 'npxbr/gruvbox.nvim'
+
 " Syntax highlight
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'sheerun/vim-polyglot'
+
 " Fuzzy finder 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 " Tags manager
 Plug 'ludovicchabant/vim-gutentags'
+
 " Intellisense engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Jsonc syntax 
-Plug 'neoclide/jsonc.vim'
+
 " Git integration manager
 Plug 'tpope/vim-fugitive'
+
 " Quote/Paranthesis manager
 Plug 'tpope/vim-surround'
+
 " Statusline
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
+
 " Comment manager
 Plug 'preservim/nerdcommenter'
+
 " Symbols/Tags sidebar
 Plug 'liuchengxu/vista.vim'
-"Plug 'ryanoasis/vim-devicons'
+
 " Snippets manager
 Plug 'honza/vim-snippets'
 
 call plug#end()
+
 """""""""""""""" Load vim plugins """""""""""""""""""""""""""""
 
 
+
+"""""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
+
+lua <<EOF
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.cmake = {
+  install_info = {
+    url = "~/.treesitter/tree-sitter-cmake", -- local path or git repo
+    files = {"src/parser.c"}
+  },
+  filetype = "cmake", -- if filetype does not agrees with parser name
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  indent = {
+    enable = true
+  }
+}
+EOF
+
+"""""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
+
+
+
 """""""""""""""" Miscellaneous vim settings """""""""""""""""""
+
 set encoding=utf-8
+
 set termguicolors
-syntax on
+autocmd vimenter * ++nested syntax on " To allow polyglot, grep coloring, etc. with tree-sitter
+
 filetype plugin on
-set foldmethod=indent " Foldmethod syntax is causing performance
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 set foldlevel=99
+
 " jump to the tag if there's only one match or show list if there are multiple matches
 nnoremap <C-]> g<C-]>
 
@@ -69,7 +140,10 @@ autocmd Filetype javascript,html setlocal tabstop=2 shiftwidth=2
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4
 set expandtab
 set bs=2
-autocmd FileType make setlocal noexpandtab softtabstop=0
+autocmd FileType make setlocal noexpandtab softtabstop=0 
+
+" Set filetype of files not recognized automatically
+autocmd BufNewFile,BufRead .clangd setfiletype yaml
 
 " use alt+hjkl to move between split/vsplit panels
 tnoremap <M-h> <C-\><C-n><C-w>h
@@ -89,11 +163,11 @@ nnoremap <expr> <silent> <F3> (&diff ? "[c" : ":cprev\<CR>")
 """""""""""""""" Miscellaneous vim settings """""""""""""""""""
 
 
-"""""""""""""""" Miscellaneous plugin settings """"""""""""""""
 
-" Gutentags settings
+""""""""""""""""""""""" Gutentags settings """"""""""""""""""""
+
 let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', 'requirements.txt', '.git']
+let g:gutentags_project_root = ['package.json', 'pipfile', 'requirements.txt', '.git', 'CMakeLists.txt']
 let g:gutentags_ctags_extra_args = [
 \ '--tag-relative=yes',
 \ '--fields=+ailmnS',
@@ -133,40 +207,62 @@ let g:gutentags_ctags_exclude = [
 \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
 \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
 \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx', '*.xls',
+\ '*.txt'
 \]
 
-" Airline settings
+""""""""""""""""""""""" Gutentags settings """"""""""""""""""""
+
+
+
+""""""""""""""""""""""" Airline settings """"""""""""""""""""""
+
 let g:airline#extensions#hunks#coc_git = 1
 let g:airline_theme='dark'
 
-" FZF settings
+""""""""""""""""""""""" Airline settings """"""""""""""""""""""
+
+
+
+""""""""""""""""""""""" FZF settings """""""""""""""""""""""""
+
 nnoremap <F5> :Rg<CR>
 "nnoremap rg :Rg <C-R><C-W><CR>
 vnoremap rg y :Rg <C-R>"<CR>
 nnoremap <Leader>T :BTags<CR>
 nnoremap <Leader>t :Tags<CR>
 
-"Nerdcommenter settings 
+""""""""""""""""""""""" FZF settings """""""""""""""""""""""""
+
+
+
+""""""""""""""""""""""" Nerdcommenter settings """"""""""""""" 
+
 let g:NERDSpaceDelims = 1
 
-" Vista settings
+""""""""""""""""""""""" Nerdcommenter settings """"""""""""""" 
+
+
+
+""""""""""""""""""""""" Vista settings """""""""""""""""""""""
+
 nmap <F8> :Vista!!<CR>
 let g:vista_default_executive = 'coc'
 let g:vista_fzf_preview = ['right:50%']
 let g:vista#renderer#enable_icon = 1
 
-"""""""""""""""" Miscellaneous plugin settings """"""""""""""""
+""""""""""""""""""""""" Vista settings """""""""""""""""""""""
+
 
 
 """""""""""""""" COC Settings """""""""""""""""""""""""""""""""
 
 let g:coc_node_path="~/.nvm/versions/node/v14.2.0/bin/node"
-let b:coc_root_patterns = ['.git', '.env']
+let b:coc_root_patterns = ['package.json', 'pipfile', '.git', '.env', 'CMakeLists.txt']
 
 let g:coc_global_extensions = [
 \'coc-markdownlint',
 \'coc-highlight',
-\'coc-python',
+\'coc-pyright',
 \'coc-explorer',
 \'coc-json', 
 \'coc-git',
@@ -185,6 +281,7 @@ let g:coc_global_extensions = [
 \'coc-html',
 \'coc-css',
 \'coc-clangd',
+\'coc-cmake',
 \]
 
 " TextEdit might fail if hidden is not set.
@@ -206,7 +303,7 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
+if has("nvim-0.5.0") || has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
@@ -303,17 +400,13 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-" Note coc#float#scroll works on neovim >= 0.4.0 or vim >= 8.2.0750
-nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-
-" NeoVim-only mapping for visual mode scroll
-" Useful on signatureHelp after jump placeholder of snippet expansion
-if has('nvim')
-  vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : "\<C-f>"
-  vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : "\<C-b>"
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -381,7 +474,7 @@ xmap ag <Plug>(coc-git-chunk-outer)
 " Undo current chunk
 nnoremap gu :<C-u>CocCommand git.chunkUndo<CR>
 
-"""""""""""""""""'  TO-DO  '""""""""""""""""""""""""""""
+" TODO: Fix below shortcuts
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> for select text for visual placeholder of snippet.
@@ -393,11 +486,12 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-
 """""""""""""""""""""""" COC Settings """""""""""""""""""""""""
 
 
+
 """""""""""""""""""""""" Terminal Settings """"""""""""""""""""
+
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
 
@@ -414,12 +508,23 @@ function! OpenVTerminal()
 endfunction
 nnoremap <C-n> :call OpenHTerminal()<CR>
 nnoremap <M-n> :call OpenVTerminal()<CR>
+
 """""""""""""""""""""""" Terminal Settings """"""""""""""""""""
 
 
-" Neo vim provider settings
+"""""""""""""""""""""""" Neo vim provider settings """"""""""""
+
 let g:node_host_prog='~/.nvm/versions/node/v14.2.0/bin/neovim-node-host'
 let g:python3_host_prog='/usr/local/bin/python3'
 
-" Apply gruvbox colorscheme
-autocmd vimenter * ++nested colorscheme gruvbox
+"""""""""""""""""""""""" Neo vim provider settings """"""""""""
+
+
+
+"""""""""""""""""""""""" Apply colorscheme """"""""""""""""""""
+
+set background=dark
+colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
+
+"""""""""""""""""""""""" Apply colorscheme """"""""""""""""""""

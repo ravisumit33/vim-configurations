@@ -22,11 +22,9 @@
 
   "git.addGBlameToVirtualText": true,
 
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+  "clangd.path": "/Users/sumik/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+  "clangd.arguments": ["--log=verbose"]
 
-  "python.jediPath": "~/Library/Python/3.9/lib/python/site-packages",
-  /* "python.formatting.provider": "black", */
-  "python.terminal.activateEnvironment": true
   /* "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags" */
 }
 
