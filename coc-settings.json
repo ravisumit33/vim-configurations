@@ -1,5 +1,4 @@
 {
-  /* "coc.preferences.formatOnSaveFiletypes": ["python", "javascript"], */
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true, 
   "explorer.previewAction.onHover": false,
@@ -12,19 +11,23 @@
   "list.normalMappings": {
     "q": "action:quickfix"
   },
-  /* "list.previewSplitRight":true, */
   "list.source.grep.excludePatterns": ["^tags*", "**/.git/*"],
   "list.source.files.args": ["--hidden", "--files"],
 
+  "suggest.languageSourcePriority": 100,
+  "tabnine.priority": 99,
+
   "diagnostic.errorSign": "✗" ,
   "diagnostic.warningSign": "⚠",
-  "diagnostic.infoSign": "ⓘ",
+  "diagnostic.hintSign": "☀",
+  "diagnostic.infoSign": "⚐",
 
   "git.addGBlameToVirtualText": true,
 
   "clangd.path": "/Users/sumik/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
-  "clangd.arguments": ["--log=verbose"]
+  "clangd.arguments": ["--log=verbose"],
 
-  /* "python.workspaceSymbols.tagFilePath": "${workspaceFolder}/tags" */
+  "python.linting.pylintEnabled": true,
+  "python.pythonPath": "python3"
 }
 

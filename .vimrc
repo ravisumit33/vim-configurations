@@ -3,12 +3,17 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorscheme
-" Plug 'gruvbox-community/gruvbox'
-Plug 'rktjmp/lush.nvim'
-Plug 'npxbr/gruvbox.nvim'
+if has('nvim')
+  Plug 'rktjmp/lush.nvim'
+  Plug 'npxbr/gruvbox.nvim'
+else
+  Plug 'gruvbox-community/gruvbox'
+endif
 
 " Syntax highlight
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+if has('nvim')
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
 Plug 'sheerun/vim-polyglot'
 
 " Fuzzy finder 
@@ -45,7 +50,7 @@ call plug#end()
 """""""""""""""" Load vim plugins """""""""""""""""""""""""""""
 
 
-
+if has('nvim')
 """""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
 
 lua <<EOF
@@ -94,6 +99,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 """""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
+endif
 
 
 
@@ -106,8 +112,12 @@ autocmd vimenter * ++nested syntax on " To allow polyglot, grep coloring, etc. w
 
 filetype plugin on
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+if has('nvim')
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+else
+  set foldmethod=indent
+endif
 set nofoldenable
 set foldlevel=99
 
@@ -265,7 +275,6 @@ let g:coc_global_extensions = [
 \'coc-pyright',
 \'coc-explorer',
 \'coc-json', 
-\'coc-git',
 \'coc-yank',
 \'coc-tabnine',
 \'coc-snippets',
@@ -282,6 +291,8 @@ let g:coc_global_extensions = [
 \'coc-css',
 \'coc-clangd',
 \'coc-cmake',
+\'coc-git',
+\'coc-react-refactor',
 \]
 
 " TextEdit might fail if hidden is not set.
