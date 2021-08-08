@@ -13,8 +13,9 @@ endif
 " Syntax highlight
 if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+else
+  Plug 'sheerun/vim-polyglot'
 endif
-Plug 'sheerun/vim-polyglot'
 
 " Fuzzy finder 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -54,17 +55,6 @@ if has('nvim')
 """""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
 
 lua <<EOF
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.cmake = {
-  install_info = {
-    url = "~/.treesitter/tree-sitter-cmake", -- local path or git repo
-    files = {"src/parser.c"}
-  },
-  filetype = "cmake", -- if filetype does not agrees with parser name
-}
-EOF
-
-lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -90,13 +80,13 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  indent = {
-    enable = true
-  }
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+  " indent = {
+    " enable = true
+  " }
+" }
+" EOF
 
 """""""""""""""" Treesitter configurations """""""""""""""""""""""""""""
 endif
@@ -108,7 +98,10 @@ endif
 set encoding=utf-8
 
 set termguicolors
-autocmd vimenter * ++nested syntax on " To allow polyglot, grep coloring, etc. with tree-sitter
+
+if !has('nvim')
+  syntax on
+endif
 
 filetype plugin on
 
@@ -512,7 +505,7 @@ tnoremap <Esc> <C-\><C-n>
 " open hsplit/vsplit terminal on ctrl+n/shift-n
 function! OpenHTerminal()
   split term://zsh
-  resize 20
+  resize 15
 endfunction
 function! OpenVTerminal()
   vsplit term://zsh

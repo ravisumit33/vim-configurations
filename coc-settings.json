@@ -1,6 +1,6 @@
 {
   "explorer.width": 30,
-  "explorer.icon.enableNerdfont": true, 
+  "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
@@ -17,7 +17,7 @@
   "suggest.languageSourcePriority": 100,
   "tabnine.priority": 99,
 
-  "diagnostic.errorSign": "✗" ,
+  "diagnostic.errorSign": "✗",
   "diagnostic.warningSign": "⚠",
   "diagnostic.hintSign": "☀",
   "diagnostic.infoSign": "⚐",
@@ -25,9 +25,8 @@
   "git.addGBlameToVirtualText": true,
 
   "clangd.path": "/Users/sumik/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
-  "clangd.arguments": ["--log=verbose"],
 
   "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
   "python.pythonPath": "python3"
 }
-
