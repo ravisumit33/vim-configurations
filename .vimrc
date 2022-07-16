@@ -285,6 +285,7 @@ let g:coc_global_extensions = [
 \'coc-cmake',
 \'coc-git',
 \'coc-react-refactor',
+\'coc-jest',
 \]
 
 " TextEdit might fail if hidden is not set.
@@ -477,6 +478,15 @@ omap ag <Plug>(coc-git-chunk-outer)
 xmap ag <Plug>(coc-git-chunk-outer)
 " Undo current chunk
 nnoremap gu :<C-u>CocCommand git.chunkUndo<CR>
+
+" Run jest for current project
+command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+" Run jest for current file
+command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
+" Run jest for current test
+nnoremap <leader>te :call CocAction('runCommand', 'jest.singleTest')<CR>
+" Init jest in current cwd, require global jest command exists
+command! JestInit :call CocAction('runCommand', 'jest.init')
 
 " TODO: Fix below shortcuts
 " Use <C-l> for trigger snippet expand.
