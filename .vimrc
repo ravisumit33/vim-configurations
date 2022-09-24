@@ -65,12 +65,11 @@ if has('nvim')
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "cpp", "cmake", "html", "css", "javascript", "json", "jsonc", "gitignore", "python", "vim", "yaml", "bash" } ,
+  sync_install = false,
+  auto_install = true,
   highlight = {
     enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
   },
 }
 EOF
@@ -268,7 +267,6 @@ let g:vista#renderer#enable_icon = 1
 
 """""""""""""""" COC Settings """""""""""""""""""""""""""""""""
 
-let g:coc_node_path="~/.nvm/versions/node/v16.14.2/bin/node"
 let b:coc_root_patterns = ['package.json', 'pipfile', '.git', '.env', 'CMakeLists.txt']
 
 let g:coc_global_extensions = [
@@ -538,7 +536,6 @@ nnoremap <M-n> :call OpenVTerminal()<CR>
 
 """""""""""""""""""""""" Neo vim provider settings """"""""""""
 
-let g:node_host_prog='~/.nvm/versions/node/v16.14.2/bin/neovim-node-host'
 let g:python3_host_prog='/usr/bin/python3'
 
 """""""""""""""""""""""" Neo vim provider settings """"""""""""
