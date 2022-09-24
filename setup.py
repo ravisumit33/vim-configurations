@@ -5,6 +5,9 @@ from pathlib import Path
 vimrc_dir = Path.home()
 coc_settings_dir = Path("~/.config/nvim").expanduser()
 
+Path(vimrc_dir).mkdir(parents=True, exist_ok=True)
+Path(coc_settings_dir).mkdir(parents=True, exist_ok=True)
+
 vimrc = vimrc_dir / ".vimrc"
 coc_settings = coc_settings_dir / "coc-settings.json"
 
