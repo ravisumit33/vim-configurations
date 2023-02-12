@@ -31,7 +31,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Tags manager
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " Intellisense engine
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -146,6 +146,12 @@ else
   nnoremap <silent> \/ :noh<CR>
 endif
 
+" Copy relative file path to clipboard
+nnoremap <leader>cfr :let @+=expand("%")<CR>
+
+" Copy absolute file path
+nnoremap <leader>cfa :let @+=expand("%:p")<CR>
+
 " Spacing and tab
 autocmd Filetype javascript,html setlocal tabstop=2 shiftwidth=2
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4
@@ -219,7 +225,7 @@ let g:gutentags_ctags_exclude = [
 \ '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png',
 \ '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
 \ '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx', '*.xls',
-\ '*.txt'
+\ '*.txt', '*.cmake',
 \]
 
 """"""""""""""""""""""" Gutentags settings """"""""""""""""""""
