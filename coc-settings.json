@@ -1,6 +1,4 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
-
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
@@ -26,8 +24,4 @@
   "diagnostic.infoSign": "⚐",
 
   "git.addGBlameToVirtualText": true,
-
-  "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "black",
-  "python.pythonPath": "python3"
 }
