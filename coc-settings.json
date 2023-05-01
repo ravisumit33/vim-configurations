@@ -24,4 +24,6 @@
   "diagnostic.infoSign": "⚐",
 
   "git.addGBlameToVirtualText": true,
+
+  "ruff.enable": false,
 }

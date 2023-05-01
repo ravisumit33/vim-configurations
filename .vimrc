@@ -154,7 +154,7 @@ nnoremap <leader>cfa :let @+=expand("%:p")<CR>
 
 " Spacing and tab
 autocmd Filetype javascript,html setlocal tabstop=2 shiftwidth=2
-autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4
+autocmd Filetype cpp,cmake setlocal tabstop=4 shiftwidth=4
 set expandtab
 set bs=2
 autocmd FileType make setlocal noexpandtab softtabstop=0 
@@ -301,6 +301,7 @@ let g:coc_global_extensions = [
 \'coc-git',
 \'coc-react-refactor',
 \'coc-jest',
+\'@yaegassy/coc-ruff',
 \]
 
 " Some servers have issues with backup files, see #649.
@@ -394,6 +395,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+xmap <leader>qf  <Plug>(coc-fix-current)
 
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
