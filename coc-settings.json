@@ -26,4 +26,6 @@
   "git.addGBlameToVirtualText": true,
 
   "ruff.enable": false,
+  "coc.preferences.willSaveHandlerTimeout": 5000,
+  "coc.preferences.formatOnSaveTimeout": 5000
 }
