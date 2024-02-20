@@ -38,12 +38,13 @@ else:
 shutil.copyfile(".vimrc", vimrc)
 shutil.copyfile("coc-settings.json", coc_settings)
 
-to_delete_orig = input("Do you want to delete original files? y/[n]: ")
+if vimrc_exists or coc_settings_exists:
+    to_delete_orig = input("Do you want to delete original files? y/[n]: ")
 
-if to_delete_orig == "y":
-    if vimrc_exists:
-        os.remove(vimrc_dir / ".vimrc.orig")
-    if coc_settings_exists:
-        os.remove(coc_settings_dir / "coc-settings.json.orig")
+    if to_delete_orig == "y":
+        if vimrc_exists:
+            os.remove(vimrc_dir / ".vimrc.orig")
+        if coc_settings_exists:
+            os.remove(coc_settings_dir / "coc-settings.json.orig")
 
 print("Vim setup done!")
