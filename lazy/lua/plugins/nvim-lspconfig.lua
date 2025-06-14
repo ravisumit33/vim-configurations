@@ -12,6 +12,14 @@ return {
           end
         end)
       end,
+      clangd = function(_, opts)
+        local clangd_arguments = {
+          "--log=verbose",
+          "--pretty",
+          "--enable-config",
+        }
+        vim.list_extend(opts.cmd, clangd_arguments)
+      end,
     },
   },
 }
