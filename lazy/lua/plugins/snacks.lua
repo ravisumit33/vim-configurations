@@ -8,6 +8,7 @@ return {
           hidden = false,
           cycle = true,
           auto_close = true,
+          follow = true,
           layout = {
             { preview = true },
             layout = {
