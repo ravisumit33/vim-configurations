@@ -34,9 +34,24 @@ return {
     {
       "<c-/>",
       function()
-        Snacks.terminal("zsh")
+        Snacks.terminal("zsh", {
+          win = { position = "float" },
+        })
       end,
-      desc = "Toggle Terminal",
+      desc = "Toggle Terminal Floating",
+    },
+    {
+      "<c-\\>",
+      function()
+        Snacks.terminal("agent", {
+          win = {
+            position = "right",
+            width = 0.4,
+            border = "left",
+          },
+        })
+      end,
+      desc = "Run agent in right terminal;",
     },
     {
       "<c-e>",
