@@ -19,7 +19,7 @@ return {
     "rebelot/kanagawa.nvim",
   },
 
-  -- Configure LazyVim to load gruvbox
+  -- Configure LazyVim to load selected colorscheme
   {
     "LazyVim/LazyVim",
     opts = {

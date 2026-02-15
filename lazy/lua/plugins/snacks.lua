@@ -38,5 +38,27 @@ return {
       end,
       desc = "Toggle Terminal",
     },
+    {
+      "<c-e>",
+      function()
+        local file = vim.fn.expand("%:p")
+
+        -- Detect hidden (path contains "/.")
+        local is_hidden = file:match("/%.") ~= nil
+
+        -- Detect gitignored (only if inside git repo)
+        local is_ignored = false
+        if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") ~= "" then
+          is_ignored = vim.fn.system({ "git", "check-ignore", file }) ~= ""
+        end
+
+        Snacks.picker.explorer({
+          focus = file,
+          ignored = is_ignored,
+          hidden = is_hidden,
+        })
+      end,
+      desc = "Smart File Explorer",
+    },
   },
 }
