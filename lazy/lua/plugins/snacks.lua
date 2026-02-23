@@ -38,20 +38,8 @@ return {
           win = { position = "float" },
         })
       end,
+      mode = { "n", "t" },
       desc = "Toggle Terminal Floating",
-    },
-    {
-      "<c-\\>",
-      function()
-        Snacks.terminal("agent", {
-          win = {
-            position = "right",
-            width = 0.4,
-            border = "left",
-          },
-        })
-      end,
-      desc = "Run agent in right terminal;",
     },
     {
       "<c-e>",
